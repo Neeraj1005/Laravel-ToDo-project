@@ -15,9 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/list', function () {
-    return view('list');
-});
+// Route::get('/list', function () {
+//     return view('list');
+// });
+
+// Route::resource('/list','listController');
+Route::get('/list','TodoListController@index');
+Route::post('/list','TodoListController@create');
 
 Auth::routes();
 
