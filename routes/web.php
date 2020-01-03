@@ -21,10 +21,14 @@ Route::get('/', function () {
 
 // Route::resource('/list','listController');
 Route::get('/list','TodoListController@index');
+// for edit
 Route::post('/list','TodoListController@create');
+// for delete
 Route::post('/delete','TodoListController@delete');
+// for update
 Route::post('/update','TodoListController@update');
 
+// for search Box
 Route::get('/search','TodoListController@search')->name('search');
 
 Auth::routes();
