@@ -39,7 +39,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" id="delete" data-dismiss="modal" style="display: none;">Delete</button>
-			        <button type="button" class="btn btn-primary" id="savechange" style="display: none;">Save changes</button>
+			        <button type="button" class="btn btn-primary" id="savechange" data-dismiss="modal" style="display: none;">Save changes</button>
 			        <button type="button" class="btn btn-primary" id="addButton" data-dismiss="modal">Add Item</button>
 			      </div>
 			    </div><!-- /.modal-content -->
@@ -70,7 +70,8 @@
   		$(document).on('click','.ourItem',function(event) {
   			var text = $(this).text();
   			var id = $(this).find('#itemId').val();
-  			$('#title').text('you want edit');
+  			$('#title').text('Edit');
+  			var text = $.trim(text);//Is used for reduced spacing
   			$('#addItem').val(text);
   			$('#delete').show('400');
   			$('#savechange').show('400');
@@ -78,7 +79,7 @@
   			$('#id').val(id);
   		});
   		$(document).on('click','#addnew',function(event) {
-  			$('#title').text('you wants add');
+  			$('#title').text('Add ToDo');
   			$('#addItem').val('');
   			$('#delete').hide('400');
   			$('#savechange').hide('400');
@@ -87,15 +88,28 @@
 
   		$('#addButton').click(function(){
   			var text = $('#addItem').val();
-  			$.post('list', {'text': text,'_token':$('input[name=_token]').val()}, function(data) {
-  				console.log(data);
+  			if(text == "")
+  			{
+  				alert('Enter Your Routine');
+  			}else{
+  				$.post('list', {'text': text,'_token':$('input[name=_token]').val()}, function(data) {
+  					console.log(data);
   				$('#items').load(location.href + ' #items')//for refresh the page//_token use as csrf
-  			});
+  			});  				
+  			}
   		});
 
   		$("#delete").click(function(event) {
-  			var id = $("#id").val();
+  			var id = $("#id").val();//id taken of particular value
   			$.post('delete', {'id': id,'_token':$('input[name=_token]').val()}, function(data) {
+  			$('#items').load(location.href + ' #items')
+  			console.log(data);
+  			});
+  		});		
+  		$("#savechange").click(function(event) {
+  			var id = $("#id").val();//id taken of particular value
+  			var editvalue = $("#addItem").val();
+  			$.post('update', {'id': id,'editvalue':editvalue,'_token':$('input[name=_token]').val()}, function(data) {
   			$('#items').load(location.href + ' #items')
   			console.log(data);
   			});
