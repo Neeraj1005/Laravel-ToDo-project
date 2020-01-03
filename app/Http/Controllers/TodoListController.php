@@ -35,5 +35,18 @@ class TodoListController extends Controller
 		$item->item = $request->editvalue;
 		$item->save();
 		return $request->all();
+	}	
+	public function search(Request $request)
+	{
+		$term = $request->term;//always catch with a name term in search name not relate (name=searchBox)
+		$items = Item::where('item','LIKE','%'.$term.'%')->get();
+		if(count($items) == 0) {
+			$searchResults[] = "Not Found Item";
+		}else{
+			foreach ($items as $key => $value) {
+				$searchResults[] = $value->item;
+			}
+		}
+		return $searchResults;
 	}
 }

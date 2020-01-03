@@ -25,6 +25,8 @@ Route::post('/list','TodoListController@create');
 Route::post('/delete','TodoListController@delete');
 Route::post('/update','TodoListController@update');
 
+Route::get('/search','TodoListController@search')->name('search');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
