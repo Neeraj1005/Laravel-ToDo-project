@@ -20,4 +20,12 @@ class TodoListController extends Controller
 		$item->save();
 		return 'DOne';
 	}
+
+	public function delete(Request $request)
+	{
+		// return Item::where('id',$request->id)->delete();
+// OR
+		Item::where('id',$request->id)->delete();
+		return $request->all();
+	}
 }

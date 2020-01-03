@@ -18,7 +18,9 @@
 				  <div class="panel-body" id="items">
 				    <ul class="list-group">
 				     @foreach ($items as $item)
-				      <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">{{$item->item}}</li>
+				      <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">{{$item->item}}
+					<input type="hidden" id="itemId" value="{{$item->id}}">
+				      </li>
 				     @endforeach
 				    </ul>
 				  </div>
@@ -32,6 +34,7 @@
 			        <h4 class="modal-title" id="title">MyToDo</h4>
 			      </div>
 			      <div class="modal-body">
+			      	<input type="hidden" name="" id="id">
 			        <input type="text" name="" class="form-control" placeholder="add  input" id="addItem">
 			      </div>
 			      <div class="modal-footer">
@@ -66,11 +69,13 @@
 //you can use below jquery instead of "each function"
   		$(document).on('click','.ourItem',function(event) {
   			var text = $(this).text();
+  			var id = $(this).find('#itemId').val();
   			$('#title').text('you want edit');
   			$('#addItem').val(text);
   			$('#delete').show('400');
   			$('#savechange').show('400');
   			$('#addButton').hide('400');
+  			$('#id').val(id);
   		});
   		$(document).on('click','#addnew',function(event) {
   			$('#title').text('you wants add');
@@ -84,7 +89,15 @@
   			var text = $('#addItem').val();
   			$.post('list', {'text': text,'_token':$('input[name=_token]').val()}, function(data) {
   				console.log(data);
-  				$('#items').load(location.href + ' #items')
+  				$('#items').load(location.href + ' #items')//for refresh the page//_token use as csrf
+  			});
+  		});
+
+  		$("#delete").click(function(event) {
+  			var id = $("#id").val();
+  			$.post('delete', {'id': id,'_token':$('input[name=_token]').val()}, function(data) {
+  			$('#items').load(location.href + ' #items')
+  			console.log(data);
   			});
   		});
   	});

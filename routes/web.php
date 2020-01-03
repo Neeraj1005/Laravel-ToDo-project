@@ -22,6 +22,7 @@ Route::get('/', function () {
 // Route::resource('/list','listController');
 Route::get('/list','TodoListController@index');
 Route::post('/list','TodoListController@create');
+Route::post('/delete','TodoListController@delete');
 
 Auth::routes();
 
