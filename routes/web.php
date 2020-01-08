@@ -31,6 +31,10 @@ Route::post('/update','TodoListController@update');
 // for search Box
 Route::get('/search','TodoListController@search')->name('search');
 
+// Avatar
+Route::resource('/avatars','AvatarController');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
