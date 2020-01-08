@@ -71,8 +71,8 @@ class AvatarController extends Controller
      */
     public function edit($id)
     {
-        // dd($id);
-        $data = Avatar::find($id);
+        // dd($id)
+        $data = Avatar::findOrFail($id);
         return view('avatar.edit',compact('data'));
     }
 

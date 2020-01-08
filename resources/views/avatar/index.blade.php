@@ -43,7 +43,7 @@
                         {{$data->name}}
                       </td>
                       <td>
-                        {{$data->logo}}
+                        <img class="profile-user-img img-fluid img-circle" src="{{ Storage::disk('local')->url($data->logo) }}" alt="User profile picture">
                       </td>
                       <td>
                         <a href="{{ route('avatars.edit', $data->id) }}" class="btn btn-primary btn-block"><b>Edit</b></a>
