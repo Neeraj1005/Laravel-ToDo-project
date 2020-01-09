@@ -38,16 +38,33 @@ class AvatarController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name'=>'required',
+            'logo'=>'required',
+        ]);
+
+
         $data = new Avatar();
 
-        if ($request->hasFile('logo'))
-        {
-            $imageName = $request->logo->store('public');
-        }
+        // if ($request->hasFile('logo'))
+        // {
+        //     $imageName = $request->logo->store('public');
+        // }
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . "." . $extension;
+            $file->move('uploads/clogo/', $filename);
+            $data->logo = $filename;
+        } 
+        // else {
+        //     return $request;
+        //     $data->logo = '';
+        // }
         
 
         $data->name = $request->name;
-        $data->logo = $imageName;
+        // $data->logo = $imageName;
         $data->save();
         return redirect('avatars')->with('successfully created or uploaded image');
     }
@@ -71,9 +88,11 @@ class AvatarController extends Controller
      */
     public function edit($id)
     {
-        // dd($id)
+
         $data = Avatar::findOrFail($id);
         return view('avatar.edit',compact('data'));
+        // dd($id)
+
     }
 
     /**
@@ -85,15 +104,33 @@ class AvatarController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name'=>'required',
+            // 'logo'=>'required',
+        ]);
         $data = Avatar::find($id);
-        if ($request->hasFile('logo'))
-        {
-            $imageName = $request->logo->store('public');
-        }
-        
+        // if ($request->hasFile('logo'))
+        // {
+        //     $imageName = $request->logo->store('public');
+        // }
+        // $imageName = $request->file('logo')->store('public/upload');
+
+
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . "." . $extension;
+            $file->move('uploads/clogo/', $filename);
+            $data->logo = $filename;
+        } 
+        // else {
+        //     // return $request;
+        //     $data->logo = '';
+        // }
+
 
         $data->name = $request->name;
-        $data->logo = $imageName;
+        // $data->logo = $imageName;
         $data->save();
         return redirect('/avatars');
     }

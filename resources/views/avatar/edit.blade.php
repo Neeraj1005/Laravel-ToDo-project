@@ -24,8 +24,8 @@
                 <div class="card card-primary card-outline">
                   <div class="card-body box-profile">
                     <div class="text-center">
-{{-- <img class="profile-user-img img-fluid img-circle" src="{{asset('storage/'. $data->logo )}}" alt="User profile picture"> --}}
-<img class="profile-user-img img-fluid img-circle" src="{{ Storage::disk('local')->url($data->logo) }}" alt="User profile picture">
+<img class="profile-user-img img-fluid img-circle" src="{{asset('uploads/clogo/'. $data->logo )}}" alt="User profile picture">
+{{-- <img class="profile-user-img img-fluid img-circle" src="{{ Storage::disk('local')->url($data->logo) }}" alt="User profile picture"> --}}
                     </div>
 
                     <h3 class="profile-username text-center">{{$data->name}}</h3>
@@ -36,10 +36,10 @@
   @method('PUT')
                     <ul class="list-group list-group-unbordered mb-3">
                       <li class="list-group-item">
-                        <b>Company Name</b> <a class="float-right"><input type="text" class="form-control" placeholder="Enter company name" name="name" id="name"></a>
+                        <b>Company Name</b> <a class="float-right"><input type="text" class="form-control" placeholder="Enter company name" name="name" id="name" value="{{$data->name}}"></a>
                       </li>
                       <li class="list-group-item">
-                        <b>Logo</b> <a class="float-right"><input type="file" class="form-control-file" id="exampleFormControlFile1" name="logo" id="logo"></a>
+                        <b>Logo</b> <a class="float-right"><input type="file" class="form-control-file" id="exampleFormControlFile1" name="logo" id="logo" value="{{$data->logo}}"></a>
                       </li>
                     </ul>
 

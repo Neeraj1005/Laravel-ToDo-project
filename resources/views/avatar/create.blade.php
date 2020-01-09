@@ -18,7 +18,7 @@
         <section class="content">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-8">
 
                 <!-- Profile Image -->
                 <div class="card card-primary card-outline">
@@ -36,10 +36,22 @@
   @csrf
                     <ul class="list-group list-group-unbordered mb-3">
                       <li class="list-group-item">
-                        <b>Company Name</b> <a class="float-right"><input type="text" class="form-control" placeholder="Enter company name" name="name" id="name"></a>
+
+                        <b>Company Name</b> <a class="float-right">
+                          <input type="text" 
+                          class="form-control @error('name') is-invalid @enderror" 
+                          placeholder="Enter company name" 
+                          name="name" id="name" value="{{old('name')}}">
+                        <div class="alert alert-danger" style="display: none">{{$errors->first('name')}}</div>
+                        </a>
                       </li>
+                      
+
                       <li class="list-group-item">
-                        <b>Logo</b> <a class="float-right"><input type="file" class="form-control-file" id="exampleFormControlFile1" name="logo" id="logo"></a>
+                        <b>Logo</b> <a class="float-right">
+                          <input type="file" class="form-control-file @error('logo') is-invalid @enderror" id="exampleFormControlFile1" name="logo" id="logo" value="{{old('logo')}}">
+                        </a>
+                        <div class="alert alert-danger" style="display: none">{{$errors->first('logo')}}</div>
                       </li>
                     </ul>
 
