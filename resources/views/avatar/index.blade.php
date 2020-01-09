@@ -32,6 +32,7 @@
                       <th>Name</th>
                       <th>profile</th>
                       <th>Edit</th>
+                      <th>Delete</th>
                     </thead>
                     <tbody>
                       @foreach($data as $data)
@@ -48,6 +49,13 @@
                       </td>
                       <td>
                         <a href="{{ route('avatars.edit', $data->id) }}" class="btn btn-primary btn-block"><b>Edit</b></a>
+                      </td>    
+                      <td>
+                        <form action="{{ route('avatars.destroy', $data->id) }}" method="post" >
+                          @csrf
+                          @method('Delete')
+                        <button type="submit" class="btn btn-primary btn-block">Delete</button>
+                        </form>
                       </td>
                       </tr>
                       @endforeach

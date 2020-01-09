@@ -143,6 +143,8 @@ class AvatarController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Avatar::find($id);
+        $data->delete();
+        return redirect('/avatars');
     }
 }
