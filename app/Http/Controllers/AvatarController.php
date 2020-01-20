@@ -40,10 +40,22 @@ class AvatarController extends Controller
     {
         $request->validate([
             'name'=>'required',
-            'logo'=>'required',
+            'image'=>'required',
         ]);
+//This one is perfect exmple to store an image and its properties to show an image
+        $image = $request->file('image');
+        $extension = $image->getClientOriginalExtension();
+        $originalname = $image->getClientOriginalName();
+        $path = $image->move('uploads/media/', $originalname); // REMOVE STR_REPLACE HERE
+        $imgsizes = $path->getSize();
+        $mimetype = $image->getClientMimeType();
 
+        $picture = new Avatar();
+        $picture->name = $request->name;
+        $picture->filename = str_replace('\\', '/', $path); // USE IT HERE
+        $picture->save();
 
+/*Un comment this 2nd method
         $data = new Avatar();
 
         // if ($request->hasFile('logo'))
@@ -66,6 +78,7 @@ class AvatarController extends Controller
         $data->name = $request->name;
         // $data->logo = $imageName;
         $data->save();
+        */
         return redirect('avatars')->with('successfully created or uploaded image');
     }
 

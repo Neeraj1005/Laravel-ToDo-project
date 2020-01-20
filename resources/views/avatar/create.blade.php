@@ -47,11 +47,17 @@
                       </li>
                       
 
-                      <li class="list-group-item">
+            {{--           <li class="list-group-item">
                         <b>Logo</b> <a class="float-right">
                           <input type="file" class="form-control-file @error('logo') is-invalid @enderror" id="exampleFormControlFile1" name="logo" id="logo" value="{{old('logo')}}">
                         </a>
                         <div class="alert alert-danger" style="display: none">{{$errors->first('logo')}}</div>
+                      </li>  --}}                  
+                      <li class="list-group-item">
+                        <b>Logo</b> <a class="float-right">
+                          <input type="file" class="form-control-file @error('logo') is-invalid @enderror" id="exampleFormControlFile1" name="image" id="image" value="{{old('image')}}">
+                        </a>
+                        <div class="alert alert-danger" style="display: none">{{$errors->first('image')}}</div>
                       </li>
                     </ul>
 

@@ -45,7 +45,8 @@
                       </td>
                       <td>
 {{--                         <img class="profile-user-img img-fluid img-circle" src="{{ Storage::disk('local')->url($data->logo) }}" alt="User profile picture"> --}}
-<img class="profile-user-img img-fluid img-circle" src="{{ url('uploads/clogo/'.$data->logo) }}" alt="User profile picture">
+{{-- <img class="profile-user-img img-fluid img-circle" src="{{ url('uploads/clogo/'.$data->logo) }}" alt="User profile picture"> --}}
+<img class="profile-user-img img-fluid img-circle" src="{{ url($data->filename) }}" alt="User profile picture">
                       </td>
                       <td>
                         <a href="{{ route('avatars.edit', $data->id) }}" class="btn btn-primary btn-block"><b>Edit</b></a>
