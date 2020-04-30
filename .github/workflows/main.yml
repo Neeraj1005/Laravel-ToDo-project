@@ -31,11 +31,10 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
-    
-    # update dependencies
-      - name: Updates dependencies automatically
-      uses: haya14busa/action-depup@v1.0.4
-      with:
+        
+- name: Updates dependencies automatically
+  uses: haya14busa/action-depup@v1.0.4
+  with:
     # GITHUB_TOKEN to get latest version with GitHub Release API
     github_token: # optional, default is ${{ github.token }}
     # target file
@@ -43,4 +42,4 @@ jobs:
     # target version name. e.g. REVIEWDOG_VERSION
     version_name: 
     # target GitHub repository. e.g. reviewdog/reviewdog
-    repo: 
+    repo:  
